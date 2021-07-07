@@ -12,7 +12,7 @@ public class perecislenie : MonoBehaviour
     }
     void Start()
     {
-        studentsAge = studentsAge.Veronika; // назначить состояние
+        //studentsAge = studentsAge.Veronika; // назначить состояние
         print(studentsAge.Veronika); 
     }
 

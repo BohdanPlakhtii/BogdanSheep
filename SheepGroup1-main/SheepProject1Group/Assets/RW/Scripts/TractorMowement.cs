@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class TractorMowement : MonoBehaviour
 {
-    
+
     public float speed = 10f;
     private float direction;
     private bool mowe;
-    // Start is called before the first frame update
+    public Transform shootPoint;
+    public GameObject bullet;
+    private float nextFire;
+    public float fireRate = 2f;
     void Start()
     {
-         
+        shootPoint = transform.GetChild(1);
     }
 
     // Update is called once per frame
@@ -19,7 +22,7 @@ public class TractorMowement : MonoBehaviour
     {
         if (mowe == true)
         {
-            if((transform.position.x >= -17f)  && (direction == 1f))
+            if ((transform.position.x >= -17f) && (direction == 1f))
             {
                 transform.Translate(Vector3.right * speed * direction * Time.deltaTime);
             }
@@ -29,7 +32,8 @@ public class TractorMowement : MonoBehaviour
                 transform.Translate(Vector3.right * speed * direction * Time.deltaTime);
             }
         }
-        
+
+        nextFire -= Time.deltaTime;
     }
 
     public void Left()
@@ -49,4 +53,15 @@ public class TractorMowement : MonoBehaviour
         mowe = false;
     }
 
+    public void shoot()
+    {
+        print("вы выстрелили в бедную и нещасную овцу блоком сена :-( ");
+        
+        if(nextFire < 0)
+        {
+            Instantiate(bullet, shootPoint.position , bullet.transform.rotation);
+            nextFire = fireRate;
+        }
+        
+    }
 }
